@@ -3,225 +3,745 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AllPanel 7 ID</title>
+<title>TIMPASS 3D — Mini Games</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap');
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
+}
+
+:root{
+    --bg:#050816;
+    --panel:rgba(16,22,48,.72);
+    --cyan:#00eaff;
+    --purple:#8b5cf6;
+    --pink:#ff2bd6;
+    --blue:#287bff;
+    --green:#20ff9a;
+    --text:#fff;
+    --muted:#9da7c7;
 }
 
 body{
-    background:#042b23;
-    color:#fff;
-    overflow-x:auto;
-}
-
-.container{
-    display:flex;
+    font-family:Poppins,sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 10% 20%,rgba(0,234,255,.13),transparent 25%),
+        radial-gradient(circle at 90% 10%,rgba(139,92,246,.18),transparent 25%),
+        radial-gradient(circle at 50% 100%,rgba(255,43,214,.1),transparent 30%),
+        var(--bg);
     min-height:100vh;
+    overflow-x:hidden;
 }
 
-.demo{
-    width:70%;
-    background:#111;
+/* BACKGROUND GRID */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:50px 50px;
+    mask-image:linear-gradient(to bottom,black,transparent);
 }
 
-iframe{
-    width:100%;
-    height:100vh;
-    border:none;
+.orb{
+    position:fixed;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.25;
+    pointer-events:none;
+    animation:float 8s ease-in-out infinite;
 }
 
-.right{
-    width:30%;
-    padding:30px 22px;
-    background:linear-gradient(180deg,#008f73,#043d33);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+.orb.one{
+    width:250px;
+    height:250px;
+    background:#00eaff;
+    left:-100px;
+    top:180px;
 }
 
-.box{
-    width:100%;
-    background:#07110f;
-    border:1px solid #00e8ad;
+.orb.two{
+    width:300px;
+    height:300px;
+    background:#8b5cf6;
+    right:-120px;
+    top:400px;
+    animation-delay:2s;
+}
+
+@keyframes float{
+    50%{transform:translateY(-40px) translateX(20px)}
+}
+
+/* NAV */
+
+nav{
+    width:min(1200px,94%);
+    margin:20px auto;
+    padding:15px 22px;
+    border:1px solid rgba(255,255,255,.1);
     border-radius:22px;
-    padding:24px 18px;
-    text-align:center;
-    box-shadow:0 0 30px rgba(0,232,173,.35);
+    background:rgba(10,15,35,.7);
+    backdrop-filter:blur(20px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:relative;
+    z-index:5;
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.4),
+        inset 0 1px rgba(255,255,255,.08);
+}
+
+.logo{
+    font-family:Orbitron,sans-serif;
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:3px;
+    color:white;
+    text-shadow:
+        0 0 10px var(--cyan),
+        0 0 30px var(--purple);
+}
+
+.logo span{
+    color:var(--cyan);
+}
+
+.nav-links{
+    display:flex;
+    gap:28px;
+}
+
+.nav-links a{
+    color:#aeb8d6;
+    text-decoration:none;
+    font-size:14px;
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    color:white;
+    text-shadow:0 0 15px var(--cyan);
+}
+
+/* HERO */
+
+.hero{
+    width:min(1200px,94%);
+    margin:70px auto 50px;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:50px;
+    align-items:center;
 }
 
 .badge{
     display:inline-block;
-    background:#00e8ad;
-    color:#001f18;
-    padding:10px 22px;
-    border-radius:30px;
-    font-weight:bold;
-    margin-bottom:16px;
+    padding:8px 15px;
+    border:1px solid rgba(0,234,255,.4);
+    background:rgba(0,234,255,.08);
+    color:var(--cyan);
+    border-radius:50px;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:2px;
+    margin-bottom:20px;
 }
 
-h1{
-    color:#00e8ad;
-    font-size:30px;
+.hero h1{
+    font-family:Orbitron,sans-serif;
+    font-size:clamp(45px,7vw,85px);
+    line-height:.95;
+    letter-spacing:-4px;
     text-transform:uppercase;
-    margin-bottom:12px;
 }
 
-.sub{
-    color:#ddd;
-    line-height:1.6;
-    margin-bottom:18px;
-    font-size:16px;
+.hero h1 .gradient{
+    background:linear-gradient(90deg,#00eaff,#8b5cf6,#ff2bd6);
+    -webkit-background-clip:text;
+    color:transparent;
+    filter:drop-shadow(0 0 25px rgba(0,234,255,.2));
 }
 
-.process{
-    text-align:left;
-    background:linear-gradient(180deg,#07110f,#06483b);
-    border:1px solid #00e8ad;
-    border-radius:16px;
-    padding:18px;
-    margin:18px 0;
+.hero p{
+    color:var(--muted);
+    max-width:580px;
+    margin:25px 0;
+    line-height:1.8;
 }
 
-.process h2{
-    color:#00e8ad;
-    font-size:20px;
-    margin-bottom:12px;
-    text-align:center;
-}
-
-.process h3{
-    color:#fff;
-    font-size:18px;
-    margin:16px 0 8px;
-}
-
-.process p,
-.process li{
-    color:#ddd;
-    font-size:15px;
-    line-height:1.6;
-}
-
-.process ol{
-    padding-left:20px;
-}
-
-.manual-whatsapp,
-.signup{
-    display:block;
-    background:#00e8ad;
-    color:#001f18;
-    text-decoration:none;
-    padding:15px;
+.play-btn{
+    border:0;
+    padding:16px 30px;
     border-radius:14px;
-    font-size:20px;
-    font-weight:bold;
-    text-align:center;
-    box-shadow:0 0 18px rgba(0,232,173,.4);
+    color:white;
+    font-weight:800;
+    cursor:pointer;
+    background:linear-gradient(135deg,#00cfff,#7252ff);
+    box-shadow:
+        0 10px 0 #30219b,
+        0 18px 35px rgba(0,140,255,.3);
+    transform:translateY(0);
+    transition:.2s;
 }
 
-.manual-whatsapp{
-    margin:14px 0 8px;
+.play-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 14px 0 #30219b,
+        0 25px 45px rgba(0,140,255,.4);
 }
 
-.signup{
-    margin-top:16px;
+.play-btn:active{
+    transform:translateY(6px);
+    box-shadow:0 4px 0 #30219b;
 }
 
-.manual-whatsapp:hover,
-.signup:hover{
-    background:#00c996;
+/* 3D HERO CARD */
+
+.hero-3d{
+    perspective:1000px;
 }
 
-.features{
+.console{
+    height:390px;
+    border-radius:35px;
+    position:relative;
+    transform:rotateY(-12deg) rotateX(6deg);
+    transform-style:preserve-3d;
+    transition:.5s;
+    background:
+        linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.02)),
+        linear-gradient(135deg,#101c42,#15102e);
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:
+        30px 35px 0 rgba(0,0,0,.25),
+        0 40px 80px rgba(0,0,0,.6),
+        inset 0 1px rgba(255,255,255,.15);
+    overflow:hidden;
+}
+
+.console:hover{
+    transform:rotateY(0deg) rotateX(0deg) translateY(-10px);
+}
+
+.console::before{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:#00eaff;
+    filter:blur(80px);
+    opacity:.2;
+    top:-70px;
+    right:-50px;
+}
+
+.console::after{
+    content:"";
+    position:absolute;
+    inset:15px;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:25px;
+}
+
+.console-content{
+    position:absolute;
+    inset:0;
+    padding:35px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    z-index:2;
+}
+
+.console-icon{
+    position:absolute;
+    top:55px;
+    left:55px;
+    width:130px;
+    height:130px;
+    border-radius:30px;
     display:grid;
-    gap:12px;
-    margin:22px 0 18px;
+    place-items:center;
+    font-size:65px;
+    background:linear-gradient(145deg,#172a58,#0a1029);
+    box-shadow:
+        15px 15px 30px rgba(0,0,0,.5),
+        inset 2px 2px 5px rgba(255,255,255,.12),
+        0 0 35px rgba(0,234,255,.25);
+    transform:translateZ(70px) rotate(-8deg);
 }
 
-.feature{
-    background:linear-gradient(90deg,#092a24,#06483b);
-    border:1px solid #00e8ad;
-    border-radius:14px;
-    padding:14px;
-    font-size:17px;
-    font-weight:bold;
+.console h2{
+    font-family:Orbitron;
+    font-size:28px;
 }
 
-.feature span{
-    color:#00e8ad;
+.console small{
+    color:#8e9abc;
 }
 
-.website-row{
+/* SECTION */
+
+.section{
+    width:min(1200px,94%);
+    margin:80px auto;
+}
+
+.section-head{
     display:flex;
     justify-content:space-between;
-    gap:10px;
-    margin-top:18px;
-    font-weight:bold;
-    flex-wrap:wrap;
+    align-items:end;
+    margin-bottom:30px;
 }
 
-.website-row a{
-    text-decoration:none;
-    word-break:break-word;
+.section-head h2{
+    font-family:Orbitron;
+    font-size:28px;
 }
 
-.website,
-.whatsapp-small{
-    color:#00e8ad;
+.section-head p{
+    color:var(--muted);
+    font-size:13px;
 }
 
-.trust{
-    margin-top:18px;
-    color:#ccc;
-    line-height:1.7;
+/* GAME GRID */
+
+.games{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:22px;
 }
 
-.footer{
-    margin-top:20px;
-    color:#888;
+.game-card{
+    min-height:260px;
+    padding:22px;
+    border-radius:25px;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    background:linear-gradient(145deg,rgba(25,32,65,.9),rgba(9,13,31,.9));
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:
+        12px 14px 0 rgba(0,0,0,.25),
+        0 25px 45px rgba(0,0,0,.35),
+        inset 1px 1px rgba(255,255,255,.08);
+    transform-style:preserve-3d;
+    transition:.4s;
+}
+
+.game-card:hover{
+    transform:perspective(900px) rotateX(5deg) rotateY(-5deg) translateY(-12px);
+    box-shadow:
+        18px 22px 0 rgba(0,0,0,.25),
+        0 35px 60px rgba(0,0,0,.5),
+        0 0 30px rgba(0,234,255,.15);
+}
+
+.game-card::before{
+    content:"";
+    position:absolute;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    right:-50px;
+    top:-50px;
+    filter:blur(35px);
+    opacity:.35;
+}
+
+.card-cyan::before{background:#00eaff}
+.card-purple::before{background:#8b5cf6}
+.card-pink::before{background:#ff2bd6}
+.card-green::before{background:#20ff9a}
+
+.game-icon{
+    width:70px;
+    height:70px;
+    display:grid;
+    place-items:center;
+    font-size:36px;
+    border-radius:20px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.1);
+    box-shadow:
+        8px 8px 15px rgba(0,0,0,.35),
+        inset 1px 1px rgba(255,255,255,.1);
+    transform:translateZ(40px);
+    margin-bottom:30px;
+}
+
+.game-card h3{
+    font-family:Orbitron;
+    font-size:17px;
+    margin-bottom:7px;
+    transform:translateZ(30px);
+}
+
+.game-card p{
+    color:#8994b5;
+    font-size:12px;
+    line-height:1.6;
+    transform:translateZ(20px);
+}
+
+.game-play{
+    position:absolute;
+    right:18px;
+    bottom:18px;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.08);
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+    box-shadow:0 8px 15px rgba(0,0,0,.4);
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.stat{
+    padding:25px;
+    border-radius:20px;
+    background:rgba(15,21,45,.7);
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:inset 0 1px rgba(255,255,255,.08);
+}
+
+.stat span{
+    color:#8f9abb;
     font-size:12px;
 }
 
-/* MOBILE — Laptop jaisa same layout */
-@media(max-width:768px){
+.stat strong{
+    display:block;
+    margin-top:5px;
+    font-family:Orbitron;
+    font-size:30px;
+}
 
-    body{
-        overflow-x:auto;
+/* MODAL */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(15px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    z-index:100;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-box{
+    width:min(700px,100%);
+    min-height:500px;
+    border-radius:30px;
+    padding:28px;
+    position:relative;
+    background:
+        linear-gradient(145deg,rgba(28,36,75,.97),rgba(8,12,30,.98));
+    border:1px solid rgba(255,255,255,.15);
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.8),
+        inset 1px 1px rgba(255,255,255,.12);
+    animation:modalIn .35s ease;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:perspective(900px) rotateX(-15deg) scale(.8);
+    }
+    to{
+        opacity:1;
+        transform:perspective(900px) rotateX(0) scale(1);
+    }
+}
+
+.close{
+    position:absolute;
+    right:20px;
+    top:18px;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid rgba(255,255,255,.1);
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.modal-title{
+    font-family:Orbitron;
+    margin-bottom:20px;
+}
+
+.game-area{
+    min-height:360px;
+    border-radius:22px;
+    background:#050817;
+    border:1px solid rgba(255,255,255,.08);
+    position:relative;
+    overflow:hidden;
+}
+
+/* TAP RUSH */
+
+.target{
+    position:absolute;
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:5px solid white;
+    background:radial-gradient(circle,#fff,#00eaff 35%,#006eff 70%);
+    box-shadow:
+        0 0 15px #00eaff,
+        0 0 40px #00eaff,
+        0 0 80px rgba(0,234,255,.5);
+    cursor:pointer;
+}
+
+.hud{
+    position:absolute;
+    top:15px;
+    left:15px;
+    right:15px;
+    display:flex;
+    justify-content:space-between;
+    z-index:5;
+}
+
+.hud div{
+    padding:8px 13px;
+    border-radius:10px;
+    background:rgba(0,0,0,.5);
+    border:1px solid rgba(255,255,255,.1);
+    font-size:13px;
+}
+
+/* MEMORY */
+
+.memory-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    padding:15px;
+}
+
+.memory-card{
+    height:75px;
+    perspective:800px;
+    cursor:pointer;
+}
+
+.memory-inner{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:.45s;
+}
+
+.memory-card.flipped .memory-inner,
+.memory-card.matched .memory-inner{
+    transform:rotateY(180deg);
+}
+
+.memory-front,
+.memory-back{
+    position:absolute;
+    inset:0;
+    backface-visibility:hidden;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+}
+
+.memory-front{
+    background:linear-gradient(145deg,#16265c,#080e2a);
+    border:1px solid rgba(0,234,255,.25);
+    box-shadow:5px 6px 10px rgba(0,0,0,.35);
+    font-size:20px;
+}
+
+.memory-back{
+    transform:rotateY(180deg);
+    background:linear-gradient(145deg,#00cfff,#6d4cff);
+    font-size:28px;
+}
+
+/* PUZZLE */
+
+.puzzle{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    height:100%;
+    min-height:360px;
+}
+
+.question{
+    font-family:Orbitron;
+    font-size:40px;
+    margin-bottom:25px;
+    text-shadow:0 0 25px rgba(0,234,255,.4);
+}
+
+.answer{
+    width:220px;
+    padding:15px;
+    border-radius:12px;
+    border:1px solid rgba(0,234,255,.3);
+    background:#090f26;
+    color:white;
+    text-align:center;
+    outline:none;
+    font-size:18px;
+}
+
+.submit{
+    margin-top:15px;
+    padding:13px 25px;
+    border:0;
+    border-radius:12px;
+    background:linear-gradient(135deg,#00eaff,#7654ff);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* SPACE */
+
+.space{
+    height:360px;
+    position:relative;
+    background:
+        radial-gradient(circle at 20% 20%,white 1px,transparent 2px),
+        radial-gradient(circle at 80% 30%,white 1px,transparent 2px),
+        radial-gradient(circle at 50% 70%,white 1px,transparent 2px),
+        radial-gradient(circle at 30% 85%,white 1px,transparent 2px),
+        #02040e;
+}
+
+.player{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:45px;
+    filter:drop-shadow(0 0 15px #00eaff);
+}
+
+.asteroid{
+    position:absolute;
+    top:-40px;
+    font-size:32px;
+}
+
+/* TOUCH CONTROLS */
+
+.controls{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:15px;
+}
+
+.controls button{
+    width:65px;
+    height:50px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.08);
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+footer{
+    width:min(1200px,94%);
+    margin:100px auto 30px;
+    padding:25px 0;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:#687391;
+    font-size:12px;
+    text-align:center;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+    .hero{
+        grid-template-columns:1fr;
     }
 
-    .container{
-        width:1200px;
-        min-width:1200px;
-        flex-direction:row;
+    .games{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .demo{
-        width:70%;
+    .console{
+        height:330px;
+        transform:none;
+    }
+}
+
+@media(max-width:600px){
+    .nav-links{
+        display:none;
     }
 
-    .right{
-        width:30%;
-        padding:25px 18px;
+    .hero{
+        margin-top:45px;
     }
 
-    iframe{
-        height:100vh;
-        min-height:700px;
+    .hero h1{
+        font-size:45px;
     }
 
-    h1{
-        font-size:28px;
+    .games{
+        grid-template-columns:1fr;
     }
 
-    .manual-whatsapp,
-    .signup{
-        font-size:19px;
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .modal-box{
+        padding:18px;
+    }
+
+    .memory-card{
+        height:60px;
     }
 }
 </style>
@@ -229,117 +749,656 @@ h1{
 
 <body>
 
-<div class="container">
+<div class="orb one"></div>
+<div class="orb two"></div>
 
-    <div class="demo">
-        <iframe src="https://www.allpanel7.com/?code=MAHA1991"></iframe>
+<nav>
+    <div class="logo">TIM<span>PASS</span></div>
+
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#games">Games</a>
+        <a href="#stats">Stats</a>
     </div>
 
-    <div class="right">
+    <button class="play-btn" onclick="openGame('tap')">
+        PLAY NOW
+    </button>
+</nav>
 
-        <div class="box">
+<!-- HERO -->
 
-            <div class="badge">ALLPANEL7</div>
+<section class="hero">
 
-            <h1>Get Your AllPanel7 ID</h1>
+    <div>
+        <div class="badge">3D MINI GAME HUB</div>
 
-            <p class="sub">
-                Choose the registration method that's most convenient for you and get started with AllPanel 7 today!
-            </p>
+        <h1>
+            PLAY.<br>
+            <span class="gradient">RELAX.</span><br>
+            REPEAT.
+        </h1>
 
-            <div class="process">
+        <p>
+            Take a break with a collection of fast, addictive mini games.
+            Challenge your brain, reflexes and reaction speed.
+        </p>
 
-                <h2>Get Your AllPanel 7 ID – Your Choice!</h2>
+        <button class="play-btn" onclick="openGame('tap')">
+            ▶ START GAMING
+        </button>
+    </div>
 
-                <h3>✅ Manual ID</h3>
+    <div class="hero-3d">
+        <div class="console">
 
-                <p>
-                    Click the <strong>"WhatsApp Now"</strong> button and our team will create your ID for you.
-                </p>
+            <div class="console-icon">🎮</div>
 
-                <a class="manual-whatsapp"
-                   href="https://wa.me/+917980303785?text=Hello%20I%20want%20new%20manual%20ID"
-                   target="_blank">
-                    📲 WhatsApp Now
-                </a>
-
-                <h3>✅ Self-Registration</h3>
-
-                <p>
-                    Click the <strong>"Sign Up"</strong> button and follow these simple steps:
-                </p>
-
-                <ol>
-                    <li>Enter your mobile number.</li>
-                    <li>Create your username.</li>
-                    <li>Create your password and confirm it.</li>
-                    <li>The Signup Code is pre-filled as <strong>MAHA1991</strong>.</li>
-                    <li>Click <strong>"Sign Up"</strong> to complete your registration.</li>
-                </ol>
-
-                <a class="signup"
-                   href="https://www.allpanel7.com/?code=MAHA1991"
-                   target="_blank">
-                    📝 Sign Up
-                </a>
-
-            </div>
-
-            <div class="features">
-
-                <div class="feature">
-                    Minimum Deposit:
-                    <span>₹100 Only</span>
-                </div>
-
-                <div class="feature">
-                    Welcome Bonus:
-                    <span>10%</span>
-                </div>
-
-                <div class="feature">
-                    Auto and Manual Service:
-                    <span>Available</span>
-                </div>
-
-                <div class="feature">
-                    Quick Help:
-                    <span>24/7 Support Available</span>
-                </div>
-
-            </div>
-
-            <div class="website-row">
-
-                <a class="website"
-                   href="https://www.allpanel7.com/?code=MAHA1991"
-                   target="_blank">
-                    🌐 www.allpanel7.com/?code=MAHA1991
-                </a>
-
-                <a class="whatsapp-small"
-                   href="https://wa.me/+917980303785"
-                   target="_blank">
-                    💬 WhatsApp
-                </a>
-
-            </div>
-
-            <div class="trust">
-                ✅ Trusted Manual Support<br>
-                ✅ Simple Process<br>
-                ✅ Fast Response
-            </div>
-
-            <div class="footer">
-                18+ Only | Play Responsibly | Follow Your Local Laws | T&amp;C Apply
+            <div class="console-content">
+                <small>FEATURED GAME</small>
+                <h2>Tap Rush 3D</h2>
+                <p>How fast can you tap?</p>
             </div>
 
         </div>
+    </div>
+
+</section>
+
+<!-- GAMES -->
+
+<section class="section" id="games">
+
+    <div class="section-head">
+        <div>
+            <h2>GAME ARCADE</h2>
+            <p>Choose your challenge</p>
+        </div>
+    </div>
+
+    <div class="games">
+
+        <div class="game-card card-cyan" onclick="openGame('tap')">
+            <div class="game-icon">⚡</div>
+            <h3>TAP RUSH</h3>
+            <p>Hit the glowing target as many times as possible.</p>
+            <button class="game-play">▶</button>
+        </div>
+
+        <div class="game-card card-purple" onclick="openGame('memory')">
+            <div class="game-icon">🧠</div>
+            <h3>MEMORY FLIP</h3>
+            <p>Find all matching pairs before the board beats you.</p>
+            <button class="game-play">▶</button>
+        </div>
+
+        <div class="game-card card-pink" onclick="openGame('puzzle')">
+            <div class="game-icon">🧩</div>
+            <h3>QUICK PUZZLE</h3>
+            <p>Solve as many math challenges as possible.</p>
+            <button class="game-play">▶</button>
+        </div>
+
+        <div class="game-card card-green" onclick="openGame('space')">
+            <div class="game-icon">🚀</div>
+            <h3>SPACE RUN</h3>
+            <p>Dodge incoming asteroids and survive the space run.</p>
+            <button class="game-play">▶</button>
+        </div>
+
+    </div>
+</section>
+
+<!-- STATS -->
+
+<section class="section" id="stats">
+
+    <div class="section-head">
+        <div>
+            <h2>YOUR STATS</h2>
+            <p>Stored locally in your browser</p>
+        </div>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <span>TAP RUSH BEST</span>
+            <strong id="tapBest">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>PUZZLE BEST</span>
+            <strong id="puzzleBest">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>SPACE RUN BEST</span>
+            <strong id="spaceBest">0</strong>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    © 2026 TIMPASS 3D — PLAY. RELAX. REPEAT.
+</footer>
+
+
+<!-- GAME MODAL -->
+
+<div class="modal" id="modal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeGame()">×</button>
+
+        <h2 class="modal-title" id="modalTitle">Game</h2>
+
+        <div class="game-area" id="gameArea"></div>
 
     </div>
 
 </div>
+
+
+<script>
+
+/* =========================
+   STORAGE
+========================= */
+
+let tapBest = Number(localStorage.getItem("tapBest")) || 0;
+let puzzleBest = Number(localStorage.getItem("puzzleBest")) || 0;
+let spaceBest = Number(localStorage.getItem("spaceBest")) || 0;
+
+document.getElementById("tapBest").textContent = tapBest;
+document.getElementById("puzzleBest").textContent = puzzleBest;
+document.getElementById("spaceBest").textContent = spaceBest;
+
+
+/* =========================
+   MODAL
+========================= */
+
+const modal = document.getElementById("modal");
+const modalTitle = document.getElementById("modalTitle");
+const gameArea = document.getElementById("gameArea");
+
+let timers = [];
+
+function clearTimers(){
+    timers.forEach(t => clearInterval(t));
+    timers.forEach(t => clearTimeout(t));
+    timers = [];
+}
+
+function openGame(game){
+
+    clearTimers();
+
+    modal.classList.add("active");
+
+    if(game === "tap") startTap();
+    if(game === "memory") startMemory();
+    if(game === "puzzle") startPuzzle();
+    if(game === "space") startSpace();
+}
+
+function closeGame(){
+    clearTimers();
+    modal.classList.remove("active");
+    gameArea.innerHTML = "";
+}
+
+
+/* =========================
+   TAP RUSH
+========================= */
+
+function startTap(){
+
+    modalTitle.textContent = "⚡ TAP RUSH";
+
+    gameArea.innerHTML = `
+        <div class="hud">
+            <div>Score: <b id="tapScore">0</b></div>
+            <div>Time: <b id="tapTime">20</b></div>
+        </div>
+
+        <div id="target" class="target"></div>
+    `;
+
+    let score = 0;
+    let time = 20;
+
+    const target = document.getElementById("target");
+
+    function moveTarget(){
+
+        const maxX = gameArea.clientWidth - 85;
+        const maxY = gameArea.clientHeight - 85;
+
+        target.style.left = Math.max(5,Math.random()*maxX) + "px";
+        target.style.top = Math.max(50,Math.random()*maxY) + "px";
+    }
+
+    target.onclick = () => {
+
+        score++;
+
+        document.getElementById("tapScore").textContent = score;
+
+        target.style.transform = "scale(1.4)";
+
+        setTimeout(()=>{
+            target.style.transform = "scale(1)";
+        },80);
+
+        moveTarget();
+    };
+
+    moveTarget();
+
+    const timer = setInterval(()=>{
+
+        time--;
+
+        document.getElementById("tapTime").textContent = time;
+
+        if(time <= 0){
+
+            clearInterval(timer);
+
+            if(score > tapBest){
+
+                tapBest = score;
+
+                localStorage.setItem("tapBest",tapBest);
+
+                document.getElementById("tapBest").textContent = tapBest;
+            }
+
+            alert("Time up! Score: " + score);
+        }
+
+    },1000);
+
+    timers.push(timer);
+}
+
+
+/* =========================
+   MEMORY FLIP
+========================= */
+
+function startMemory(){
+
+    modalTitle.textContent = "🧠 MEMORY FLIP";
+
+    const emojis = [
+        "🚀","🚀",
+        "🎮","🎮",
+        "👾","👾",
+        "🔥","🔥",
+        "⚡","⚡",
+        "🌙","🌙",
+        "💎","💎",
+        "🛸","🛸"
+    ];
+
+    emojis.sort(()=>Math.random()-.5);
+
+    gameArea.innerHTML = `
+        <div class="hud">
+            <div>Moves: <b id="moves">0</b></div>
+            <div>Pairs: <b id="pairs">0</b>/8</div>
+        </div>
+
+        <div class="memory-grid" id="memoryGrid"></div>
+    `;
+
+    const grid = document.getElementById("memoryGrid");
+
+    let first = null;
+    let second = null;
+    let locked = false;
+    let moves = 0;
+    let pairs = 0;
+
+    emojis.forEach((emoji,index)=>{
+
+        const card = document.createElement("div");
+
+        card.className = "memory-card";
+
+        card.innerHTML = `
+            <div class="memory-inner">
+                <div class="memory-front">?</div>
+                <div class="memory-back">${emoji}</div>
+            </div>
+        `;
+
+        card.onclick = ()=>{
+
+            if(
+                locked ||
+                card === first ||
+                card.classList.contains("matched")
+            ) return;
+
+            card.classList.add("flipped");
+
+            if(!first){
+
+                first = card;
+
+                return;
+            }
+
+            second = card;
+            moves++;
+
+            document.getElementById("moves").textContent = moves;
+
+            const a = first.querySelector(".memory-back").textContent;
+            const b = second.querySelector(".memory-back").textContent;
+
+            if(a === b){
+
+                first.classList.add("matched");
+                second.classList.add("matched");
+
+                pairs++;
+
+                document.getElementById("pairs").textContent = pairs;
+
+                first = null;
+                second = null;
+
+                if(pairs === 8){
+
+                    setTimeout(()=>{
+                        alert("🎉 You matched all pairs in " + moves + " moves!");
+                    },400);
+                }
+
+            }else{
+
+                locked = true;
+
+                setTimeout(()=>{
+
+                    first.classList.remove("flipped");
+                    second.classList.remove("flipped");
+
+                    first = null;
+                    second = null;
+
+                    locked = false;
+
+                },700);
+            }
+        };
+
+        grid.appendChild(card);
+    });
+}
+
+
+/* =========================
+   QUICK PUZZLE
+========================= */
+
+function startPuzzle(){
+
+    modalTitle.textContent = "🧩 QUICK PUZZLE";
+
+    gameArea.innerHTML = `
+        <div class="hud">
+            <div>Score: <b id="puzzleScore">0</b></div>
+            <div>Time: <b id="puzzleTime">30</b></div>
+        </div>
+
+        <div class="puzzle">
+
+            <div class="question" id="question">0 + 0</div>
+
+            <input
+                class="answer"
+                id="answer"
+                type="number"
+                placeholder="Your answer"
+            >
+
+            <button class="submit" id="submit">
+                SUBMIT
+            </button>
+
+        </div>
+    `;
+
+    let score = 0;
+    let time = 30;
+    let correctAnswer;
+
+    const question = document.getElementById("question");
+    const answer = document.getElementById("answer");
+    const submit = document.getElementById("submit");
+
+    function newQuestion(){
+
+        const a = Math.floor(Math.random()*20)+1;
+        const b = Math.floor(Math.random()*20)+1;
+
+        const operations = ["+","-","×"];
+        const op = operations[Math.floor(Math.random()*operations.length)];
+
+        if(op === "+"){
+            correctAnswer = a+b;
+        }
+
+        if(op === "-"){
+            correctAnswer = a-b;
+        }
+
+        if(op === "×"){
+            correctAnswer = a*b;
+        }
+
+        question.textContent = `${a} ${op} ${b}`;
+
+        answer.value = "";
+        answer.focus();
+    }
+
+    function checkAnswer(){
+
+        if(Number(answer.value) === correctAnswer){
+
+            score++;
+
+            document.getElementById("puzzleScore").textContent = score;
+
+            newQuestion();
+
+        }else{
+
+            answer.value = "";
+
+            answer.placeholder = "Try again!";
+        }
+    }
+
+    submit.onclick = checkAnswer;
+
+    answer.addEventListener("keydown",e=>{
+        if(e.key === "Enter") checkAnswer();
+    });
+
+    newQuestion();
+
+    const timer = setInterval(()=>{
+
+        time--;
+
+        document.getElementById("puzzleTime").textContent = time;
+
+        if(time <= 0){
+
+            clearInterval(timer);
+
+            if(score > puzzleBest){
+
+                puzzleBest = score;
+
+                localStorage.setItem("puzzleBest",puzzleBest);
+
+                document.getElementById("puzzleBest").textContent = puzzleBest;
+            }
+
+            alert("⏱️ Time up! Score: " + score);
+        }
+
+    },1000);
+
+    timers.push(timer);
+}
+
+
+/* =========================
+   SPACE RUN
+========================= */
+
+function startSpace(){
+
+    modalTitle.textContent = "🚀 SPACE RUN";
+
+    gameArea.innerHTML = `
+        <div class="hud">
+            <div>Score: <b id="spaceScore">0</b></div>
+            <div>Best: <b id="spaceCurrentBest">${spaceBest}</b></div>
+        </div>
+
+        <div class="space" id="space">
+            <div class="player" id="player">🚀</div>
+        </div>
+
+        <div class="controls">
+            <button id="left">←</button>
+            <button id="right">→</button>
+        </div>
+    `;
+
+    const space = document.getElementById("space");
+    const player = document.getElementById("player");
+
+    let playerX = 50;
+    let score = 0;
+    let running = true;
+
+    function updatePlayer(){
+
+        playerX = Math.max(5,Math.min(95,playerX));
+
+        player.style.left = playerX + "%";
+    }
+
+    function moveLeft(){
+        playerX -= 7;
+        updatePlayer();
+    }
+
+    function moveRight(){
+        playerX += 7;
+        updatePlayer();
+    }
+
+    document.getElementById("left").onclick = moveLeft;
+    document.getElementById("right").onclick = moveRight;
+
+    function keyboard(e){
+
+        if(e.key === "ArrowLeft" || e.key.toLowerCase() === "a"){
+            moveLeft();
+        }
+
+        if(e.key === "ArrowRight" || e.key.toLowerCase() === "d"){
+            moveRight();
+        }
+    }
+
+    document.addEventListener("keydown",keyboard);
+
+    timers.push(setInterval(()=>{
+
+        if(!running) return;
+
+        const asteroid = document.createElement("div");
+
+        asteroid.className = "asteroid";
+
+        asteroid.textContent = "☄️";
+
+        asteroid.style.left = Math.random()*90 + "%";
+
+        space.appendChild(asteroid);
+
+        let y = -40;
+
+        const fall = setInterval(()=>{
+
+            y += 4;
+
+            asteroid.style.top = y + "px";
+
+            const asteroidRect = asteroid.getBoundingClientRect();
+            const playerRect = player.getBoundingClientRect();
+
+            if(
+                asteroidRect.bottom > playerRect.top &&
+                asteroidRect.top < playerRect.bottom &&
+                asteroidRect.right > playerRect.left &&
+                asteroidRect.left < playerRect.right
+            ){
+
+                clearInterval(fall);
+                running = false;
+
+                if(score > spaceBest){
+
+                    spaceBest = score;
+
+                    localStorage.setItem("spaceBest",spaceBest);
+
+                    document.getElementById("spaceBest").textContent = spaceBest;
+                }
+
+                alert("💥 Game Over! Score: " + score);
+
+                document.removeEventListener("keydown",keyboard);
+
+                return;
+            }
+
+            if(y > space.clientHeight){
+
+                clearInterval(fall);
+
+                asteroid.remove();
+
+                score++;
+
+                document.getElementById("spaceScore").textContent = score;
+            }
+
+        },30);
+
+    },850));
+
+}
+
+</script>
 
 </body>
 </html>
